@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>readyPH | Disaster Preparedness Checklist, Hotlines and Evacuation Centers in the Philippines</title>
+<meta name="description" content="readyPH is a free Philippine disaster preparedness website: go-bag checklist for typhoon, earthquake, flood and fire, official emergency hotlines (911, NDRRMC, Red Cross), and barangay evacuation center list. English and Filipino.">
+<meta name="keywords" content="disaster preparedness Philippines, go bag checklist, emergency hotlines Philippines, NDRRMC, evacuation center, bagyo, lindol, baha, readyPH">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="readyPH: Disaster Preparedness for Filipino Households">
+<meta property="og:description" content="Go-bag checklist, official emergency hotlines, and evacuation centers. Free, no account, English and Filipino.">
+<meta name="theme-color" content="#C2410C">
+<style>html{color-scheme:light}</style>
+</head>
+<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: sticky top bar, one column up to 900px, then a 2-col checklist/aside. Signage-style: safety orange on cool slate. */
+:root{
+  --bg:#EAF0F4; --surface:#FFFFFF; --ink:#10243A; --muted:#4A5D70; --line:#C5D1DA;
+  --accent:#C2410C; --accent-ink:#FFFFFF; --ok:#0F766E; --ok-soft:#D5EFEA; --warn-soft:#FDE6D8;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1620; --surface:#122230; --ink:#E7EEF4; --muted:#9FB2C2; --line:#25394A;
+  --accent:#FF8A4C; --accent-ink:#1A0C03; --ok:#4CC2B1; --ok-soft:#12372F; --warn-soft:#3A2517; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1620; --surface:#122230; --ink:#E7EEF4; --muted:#9FB2C2; --line:#25394A;
+  --accent:#FF8A4C; --accent-ink:#1A0C03; --ok:#4CC2B1; --ok-soft:#12372F; --warn-soft:#3A2517; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--f-body);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1000px;margin:0 auto}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
+header.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:18px 8px}
+.brand{font:800 28px/1 var(--f-display);font-stretch:112%;letter-spacing:-.01em;margin:0}
+.brand b{color:var(--accent)}
+.langs{display:flex;border:1.5px solid var(--ink);border-radius:6px;overflow:hidden}
+.langs button{background:transparent;border:0;padding:6px 12px;font-weight:700;cursor:pointer;min-height:36px}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.intro{padding-block:12px 20px;max-width:62ch}
+.intro h2{font:800 clamp(26px,5vw,40px)/1.05 var(--f-display);font-stretch:100%;margin:0 0 10px;text-wrap:balance}
+.intro p{margin:0;color:var(--muted)}
+nav.tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
+nav.tabs button{background:transparent;border:0;padding:12px 16px;font:700 15px var(--f-body);cursor:pointer;white-space:nowrap;border-bottom:4px solid transparent;margin-bottom:-2px;color:var(--muted)}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+section.panel{padding-block:24px 0}
+.grid{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.grid{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+h3{font:800 20px/1.2 var(--f-display);margin:0 0 4px}
+.hint{color:var(--muted);font-size:14px;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-block:14px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600;min-height:36px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.meter{height:14px;background:var(--line);border-radius:7px;overflow:hidden;margin-block:10px 6px}
+.meter i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.score{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.score strong{font:800 44px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.cat{margin-top:22px}
+.cat h4{display:flex;justify-content:space-between;gap:8px;margin:0 0 6px;font:700 13px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cat h4 span{font-variant-numeric:tabular-nums}
+ul.items{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+ul.items li{border-bottom:1px solid var(--line)}
+label.item{display:flex;gap:12px;align-items:flex-start;padding:12px 4px;cursor:pointer;min-width:0}
+label.item input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--ok);flex:none}
+label.item span{min-width:0}
+label.item input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.tipbox{background:var(--warn-soft);border-radius:8px;padding:12px 14px;font-size:15px}
+.tipbox strong{display:block;margin-bottom:2px}
+.tipbox ul{margin:6px 0 0;padding-left:20px}
+aside .card + .card{margin-top:16px}
+.note{font-size:13px;color:var(--muted);margin-top:14px}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:9px 16px;font-weight:700;cursor:pointer;min-height:40px}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.sm{padding:5px 10px;min-height:32px;font-size:14px}
+.search{width:100%;padding:11px 14px;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface);margin-bottom:6px}
+.agency{margin-top:18px}
+.agency h3{padding-bottom:6px}
+.agency .role{color:var(--muted);font-size:14px;margin:0 0 6px}
+.num{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 0;border-top:1px solid var(--line)}
+.num code{font:600 17px var(--f-mono);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.num small{display:block;color:var(--muted);font:400 13px var(--f-body)}
+.num .acts{display:flex;gap:8px;align-items:center}
+.sos{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:16px 18px}
+.sos b{font:800 52px/1 var(--f-mono);letter-spacing:.02em}
+.sos p{margin:0;max-width:34ch;font-weight:600}
+.sos .btn{background:var(--accent-ink);color:var(--accent)}
+form.evac{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:14px}
+form.evac label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:14px;min-width:0}
+form.evac input{padding:9px 10px;border:1.5px solid var(--line);border-radius:6px;background:var(--bg)}
+.evlist{display:grid;gap:12px;margin-top:18px}
+.ev{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:4px;min-width:0}
+.ev h4{margin:0;font:800 18px var(--f-display)}
+.ev dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:15px}
+.ev dt{color:var(--muted)} .ev dd{margin:0;overflow-wrap:anywhere}
+.tag{display:inline-block;font:700 11px var(--f-body);letter-spacing:.08em;text-transform:uppercase;background:var(--warn-soft);padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle}
+.links{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:12px}
+.links a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;text-decoration:none;color:var(--ink);font-weight:700}
+.links a small{display:block;font-weight:400;color:var(--muted)}
+footer{margin-top:40px;padding-top:16px;border-top:2px solid var(--ink);font-size:14px;color:var(--muted);display:grid;gap:6px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:600;z-index:20}
+@media(prefers-reduced-motion:reduce){.meter i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1 class="brand">ready<b>PH</b></h1>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="fil" aria-pressed="false">Filipino</button>
+    </div>
+  </header>
+
+  <div class="intro">
+    <h2 data-i="h2"></h2>
+    <p data-i="lede"></p>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" data-tab="check" aria-selected="true" data-i="tab1"></button>
+    <button type="button" role="tab" data-tab="hot" aria-selected="false" data-i="tab2"></button>
+    <button type="button" role="tab" data-tab="evac" aria-selected="false" data-i="tab3"></button>
+  </nav>
+
+  <!-- CHECKLIST -->
+  <section class="panel" id="p-check">
+    <div class="grid">
+      <div>
+        <h3 data-i="ckTitle"></h3>
+        <p class="hint" data-i="ckHint"></p>
+        <div class="chips" id="hazChips" role="group" aria-label="Hazard"></div>
+        <div id="lists"></div>
+      </div>
+      <aside>
+        <div class="card" aria-live="polite">
+          <div class="score"><strong id="pct">0%</strong><span id="count" class="hint"></span></div>
+          <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="meter"><i id="bar"></i></div>
+          <div id="gaps" style="margin-top:14px"></div>
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn ghost sm" type="button" id="reset" data-i="reset"></button>
+          </div>
+          <p class="note" data-i="saved"></p>
+        </div>
+        <div class="card">
+          <h3 data-i="tipsTitle"></h3>
+          <ul id="tips" style="margin:8px 0 0;padding-left:20px"></ul>
+          <p class="note" data-i="tipsNote"></p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- HOTLINES -->
+  <section class="panel" id="p-hot" hidden>
+    <div class="sos">
+      <b>911</b>
+      <p data-i="sosText"></p>
+      <button class="btn" type="button" data-copy="911" data-i="copy"></button>
+    </div>
+    <div style="margin-top:20px">
+      <label for="q" class="hint" data-i="searchLabel"></label>
+      <input class="search" id="q" type="search" autocomplete="off">
+    </div>
+    <div id="agencies"></div>
+    <p class="note" data-i="hotNote"></p>
+  </section>
+
+  <!-- EVACUATION CENTERS -->
+  <section class="panel" id="p-evac" hidden>
+    <div class="tipbox">
+      <strong data-i="evTipTitle"></strong>
+      <span data-i="evTip"></span>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3 data-i="evAddTitle"></h3>
+      <form class="evac" id="evForm">
+        <label for="f-name"><span data-i="fName"></span><input id="f-name" required></label>
+        <label for="f-brgy"><span data-i="fBrgy"></span><input id="f-brgy" required></label>
+        <label for="f-land"><span data-i="fLand"></span><input id="f-land"></label>
+        <label for="f-person"><span data-i="fPerson"></span><input id="f-person"></label>
+        <label for="f-phone"><span data-i="fPhone"></span><input id="f-phone" inputmode="tel"></label>
+        <div style="align-self:end"><button class="btn" type="submit" data-i="fAdd"></button></div>
+      </form>
+    </div>
+    <div class="evlist" id="evList"></div>
+  </section>
+
+  <h3 style="margin-top:36px" data-i="srcTitle"></h3>
+  <div class="links">
+    <a href="https://www.ndrrmc.gov.ph" target="_blank" rel="noopener">NDRRMC<small data-i="s1"></small></a>
+    <a href="https://bagong.pagasa.dost.gov.ph" target="_blank" rel="noopener">PAGASA<small data-i="s2"></small></a>
+    <a href="https://www.phivolcs.dost.gov.ph" target="_blank" rel="noopener">PHIVOLCS<small data-i="s3"></small></a>
+    <a href="https://hazardhunter.georisk.gov.ph" target="_blank" rel="noopener">HazardHunterPH<small data-i="s4"></small></a>
+    <a href="https://redcross.org.ph" target="_blank" rel="noopener">Philippine Red Cross<small data-i="s5"></small></a>
+    <a href="https://ehotlines.e.gov.ph" target="_blank" rel="noopener">eHotlines<small data-i="s6"></small></a>
+  </div>
+
+  <footer>
+    <span data-i="disc"></span>
+    <span data-i="privacy"></span>
+    <span>readyPH &middot; GEC013 Science, Technology and Society &middot; Colegio de San Juan de Letran-Calamba</span>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+var T={
+en:{
+ h2:"Get your household ready before the storm, quake, or flood.",
+ lede:"A checklist, verified hotlines, and a list of evacuation centers for your barangay. No account, no sign-up, and nothing leaves your phone.",
+ tab1:"Checklist",tab2:"Hotlines",tab3:"Evacuation centers",
+ ckTitle:"Go-bag and household checklist",ckHint:"Tick what you already have. Pick a hazard to see what matters most for it.",
+ haz:{all:"All hazards",typhoon:"Typhoon",quake:"Earthquake",flood:"Flood",fire:"Fire"},
+ cats:{toil:"Toiletries",food:"Food, medicine, first aid",tools:"Emergency tools",docs:"Documents and cash"},
+ reset:"Clear all ticks",saved:"Your ticks are saved on this device only.",
+ of:"of",itemsReady:"items ready",
+ gapsTitle:"Still missing",gapsNone:"Every item in this view is ready. Re-check expiry dates and batteries every few months.",
+ left:"left",
+ tipsTitle:"Quick tips",tipsNote:"General safety guidance. Always follow advisories from PAGASA, PHIVOLCS, NDRRMC, and your local DRRM office.",
+ sosText:"National emergency hotline. Free to call. Use it when life or property is in immediate danger.",copy:"Copy",copied:"Copied",
+ searchLabel:"Search by agency or number",hotNote:"Numbers come from the government eHotlines directory (ehotlines.e.gov.ph). Lines can change, so confirm on the official site if a call does not connect. Last checked October 2026.",
+ noMatch:"No hotline matches your search.",call:"Call",
+ evTipTitle:"Local data needed.",evTip:"Evacuation centers differ per barangay. Only list centers confirmed by your barangay DRRM committee or city/municipal DRRM office. Entries you add are saved on this device only.",
+ evAddTitle:"Add an evacuation center",fName:"Center name",fBrgy:"Barangay / city",fLand:"Landmark or directions",fPerson:"Contact person",fPhone:"Contact number",fAdd:"Add to list",
+ evEmpty:"Example only",evExample:{name:"Barangay Covered Court (example)",brgy:"Your Barangay, Your City",land:"Beside the barangay hall",person:"Barangay DRRM focal person",phone:"Ask your barangay hall"},
+ lblBrgy:"Area",lblLand:"Landmark",lblPerson:"Contact",lblPhone:"Number",remove:"Remove",
+ srcTitle:"Official sources",
+ s1:"Disaster response and advisories",s2:"Weather and typhoon bulletins",s3:"Earthquake and volcano information",s4:"Check hazards at your address",s5:"Relief, first aid, blood services",s6:"Government hotline directory",
+ disc:"readyPH gives general preparedness information. It does not replace official warnings or evacuation orders.",
+ privacy:"No accounts, no tracking of personal data. Progress is kept in your browser only."
+},
+fil:{
+ h2:"Maghanda ang pamilya bago dumating ang bagyo, lindol, o baha.",
+ lede:"Checklist, mga beripikadong hotline, at listahan ng evacuation center sa inyong barangay. Walang account at walang sign-up. Walang lumalabas na datos sa inyong telepono.",
+ tab1:"Checklist",tab2:"Mga Hotline",tab3:"Evacuation center",
+ ckTitle:"Go-bag at checklist ng sambahayan",ckHint:"I-tick ang mga mayroon na kayo. Pumili ng sakuna para makita ang mahalaga rito.",
+ haz:{all:"Lahat",typhoon:"Bagyo",quake:"Lindol",flood:"Baha",fire:"Sunog"},
+ cats:{toil:"Gamit sa kalinisan",food:"Pagkain, gamot, first aid",tools:"Pang-emergency na gamit",docs:"Dokumento at pera"},
+ reset:"Burahin lahat ng tick",saved:"Nakatago lang sa device na ito ang inyong mga tick.",
+ of:"sa",itemsReady:"gamit ang handa",
+ gapsTitle:"Kulang pa",gapsNone:"Handa na ang lahat ng nasa view na ito. Suriin ang expiry at baterya kada ilang buwan.",
+ left:"natitira",
+ tipsTitle:"Mabilis na paalala",tipsNote:"Pangkalahatang gabay sa kaligtasan. Sundin palagi ang abiso ng PAGASA, PHIVOLCS, NDRRMC, at lokal na DRRM office.",
+ sosText:"Pambansang emergency hotline. Libre ang tawag. Gamitin kapag nasa panganib ang buhay o ari-arian.",copy:"Kopyahin",copied:"Nakopya",
+ searchLabel:"Maghanap ayon sa ahensya o numero",hotNote:"Ang mga numero ay mula sa eHotlines directory ng gobyerno (ehotlines.e.gov.ph). Maaaring magbago ang mga linya, kaya kumpirmahin sa opisyal na site kung hindi makakonekta. Huling sinuri noong Oktubre 2026.",
+ noMatch:"Walang hotline na tugma sa hinahanap.",call:"Tawag",
+ evTipTitle:"Kailangan ang lokal na datos.",evTip:"Magkakaiba ang evacuation center sa bawat barangay. Ilista lang ang mga kinumpirma ng inyong barangay DRRM committee o city/municipal DRRM office. Nakatago lang sa device na ito ang mga idinagdag ninyo.",
+ evAddTitle:"Magdagdag ng evacuation center",fName:"Pangalan ng center",fBrgy:"Barangay / lungsod",fLand:"Landmark o direksyon",fPerson:"Contact person",fPhone:"Contact number",fAdd:"Idagdag sa listahan",
+ evEmpty:"Halimbawa lamang",evExample:{name:"Barangay Covered Court (halimbawa)",brgy:"Inyong Barangay, Inyong Lungsod",land:"Katabi ng barangay hall",person:"Barangay DRRM focal person",phone:"Itanong sa barangay hall"},
+ lblBrgy:"Lugar",lblLand:"Landmark",lblPerson:"Kontak",lblPhone:"Numero",remove:"Alisin",
+ srcTitle:"Mga opisyal na pinagkukunan",
+ s1:"Pagtugon sa sakuna at mga abiso",s2:"Panahon at bulletin ng bagyo",s3:"Impormasyon sa lindol at bulkan",s4:"Alamin ang panganib sa inyong lugar",s5:"Relief, first aid, serbisyo sa dugo",s6:"Direktoryo ng hotline ng gobyerno",
+ disc:"Pangkalahatang impormasyon sa paghahanda ang readyPH. Hindi nito pinapalitan ang opisyal na babala o utos ng paglikas.",
+ privacy:"Walang account at walang sinusubaybayang personal na datos. Sa browser ninyo lang nakatago ang progreso."
+}};
+
+var H=["typhoon","quake","flood","fire"];
+var ITEMS=[
+ ["toil","t1","Soap, toothbrush, toothpaste","Sabon, sipilyo, toothpaste",H],
+ ["toil","t2","Towel and spare clothes","Tuwalya at pamalit na damit",H],
+ ["toil","t3","Face masks and alcohol or hand sanitizer","Face mask at alcohol o hand sanitizer",H],
+ ["toil","t4","Sanitary pads, diapers, or other personal needs","Napkin, diaper, at iba pang personal na pangangailangan",H],
+ ["food","f1","Drinking water in sealed bottles","Inuming tubig sa selyadong bote",H],
+ ["food","f2","Ready-to-eat food that needs no cooking","Pagkaing hindi na kailangang lutuin",H],
+ ["food","f3","Maintenance medicines for anyone at home","Maintenance na gamot ng sinuman sa bahay",H],
+ ["food","f4","First aid kit (bandages, antiseptic, pain reliever)","First aid kit (benda, antiseptic, pampawala ng sakit)",H],
+ ["food","f5","Baby milk and food, if there is an infant","Gatas at pagkain ng sanggol, kung mayroon",H],
+ ["tools","e1","Flashlight with spare batteries","Flashlight at ekstrang baterya",["typhoon","quake","flood","fire"]],
+ ["tools","e2","Whistle to signal for help","Pito para humingi ng tulong",["quake","flood","fire"]],
+ ["tools","e3","Power bank and charging cable","Power bank at charging cable",["typhoon","flood"]],
+ ["tools","e4","Battery or hand-crank radio","Radyong de-baterya o hand-crank",["typhoon","quake","flood"]],
+ ["tools","e5","Raincoat and waterproof bag","Kapote at waterproof na bag",["typhoon","flood"]],
+ ["tools","e6","Sturdy shoes or slippers kept near the bed","Matibay na sapatos o tsinelas malapit sa kama",["quake","fire"]],
+ ["docs","d1","Copies of IDs and birth certificates in a waterproof pouch","Kopya ng ID at birth certificate sa waterproof na pouch",H],
+ ["docs","d2","Cash in small bills","Pera sa maliliit na denominasyon",H],
+ ["docs","d3","Written list of emergency contacts","Nakasulat na listahan ng emergency contacts",H],
+ ["docs","d4","Family meeting point, agreed and written down","Napagkasunduan at nakasulat na tagpuan ng pamilya",H]
+];
+var TIPS={
+ en:{all:["Know your evacuation center and the safest route to it before you need it.","Keep the go-bag where everyone at home can reach it.","Agree on a meeting point in case the family is separated.","Charge phones and power banks when a warning is issued."],
+  typhoon:["Follow PAGASA signal warnings and the local advisory.","Secure loose roofing and objects outside the house.","Charge devices and fill water containers before landfall."],
+  quake:["Drop, cover, and hold on until the shaking stops.","Stay away from windows and heavy furniture that can fall.","After shaking, check for injuries and gas or fire before moving."],
+  flood:["Move to higher ground early. Do not wait for water to enter the house.","Never walk or drive through flowing floodwater.","Switch off electricity at the main if water is rising indoors."],
+  fire:["Know two ways out of every room.","Stay low under smoke and feel doors for heat before opening.","Once out, stay out, then call 911 or the BFP."]},
+ fil:{all:["Alamin ang inyong evacuation center at ligtas na daan papunta rito bago pa kailanganin.","Ilagay ang go-bag kung saan abot ito ng lahat sa bahay.","Magkasundo sa tagpuan kung sakaling mapaghiwalay ang pamilya.","I-charge ang telepono at power bank kapag may babala."],
+  typhoon:["Sundin ang signal ng PAGASA at lokal na abiso.","Itali o ayusin ang maluwag na bubong at mga bagay sa labas.","Mag-charge at mag-imbak ng tubig bago tumama ang bagyo."],
+  quake:["Dumapa, magtakip, at kumapit hanggang tumigil ang pagyanig.","Lumayo sa bintana at mabibigat na kasangkapang maaaring bumagsak.","Pagkatapos ng lindol, tingnan kung may sugatan, gas, o sunog bago lumipat."],
+  flood:["Lumikas sa mataas na lugar nang maaga. Huwag hintaying pumasok ang tubig.","Huwag lumusong o magmaneho sa umaagos na baha.","Patayin ang main switch kung tumataas ang tubig sa loob."],
+  fire:["Alamin ang dalawang labasan sa bawat silid.","Yumuko sa ilalim ng usok at hawakan ang pinto kung mainit bago buksan.","Kapag nakalabas na, huwag nang bumalik. Tumawag sa 911 o BFP."]}
+};
+var AG=[
+ {n:"Emergency 911",r:{en:"National emergency hotline",fil:"Pambansang emergency hotline"},l:[["911",""]]},
+ {n:"NDRRMC",r:{en:"National Disaster Risk Reduction and Management Council",fil:"National Disaster Risk Reduction and Management Council"},l:[["(02) 8911-5061 to 65 loc 100",""],["(02) 8911-1406",""],["(02) 8912-2665",""],["(02) 8912-5668",""],["(02) 8911-1873",""]]},
+ {n:"Philippine Red Cross",r:{en:"First aid, relief, blood services",fil:"First aid, relief, serbisyo sa dugo"},l:[["143",""],["(02) 8527-0000",""],["(02) 8790-2300",""],["(02) 8527-8385 to 95","National Blood Center"]]},
+ {n:"DSWD",r:{en:"Social welfare and relief assistance",fil:"Kapakanang panlipunan at relief"},l:[["0918-912-2813","Text"],["(02) 8931-8101 to 07",""],["(02) 8856-3665","DRU"],["(02) 8852-8081","DRU"]]},
+ {n:"PNP",r:{en:"Philippine National Police",fil:"Philippine National Police"},l:[["117",""],["(02) 8722-0650",""],["0917-847-5757","Text"]]},
+ {n:"BFP",r:{en:"Bureau of Fire Protection",fil:"Bureau of Fire Protection"},l:[["(02) 8426-0219",""],["(02) 8426-0246",""]]},
+ {n:"Philippine Coast Guard",r:{en:"Sea rescue and maritime emergencies",fil:"Pagsagip sa dagat at emergency sa karagatan"},l:[["(02) 8527-8481 to 89",""],["(02) 8527-3877",""],["(02) 8527-3880 to 85",""],["0917-724-3682","Text"],["0918-967-4697","Text"]]},
+ {n:"MMDA",r:{en:"Metro Manila traffic and flood response",fil:"Trapiko at pagtugon sa baha sa Metro Manila"},l:[["136",""],["(02) 8882-4151 to 77",""]]},
+ {n:"PAGASA",r:{en:"Weather and flood information",fil:"Impormasyon sa panahon at baha"},l:[["(02) 8284-0800",""]]},
+ {n:"PHIVOLCS",r:{en:"Earthquake and volcano information",fil:"Impormasyon sa lindol at bulkan"},l:[["(02) 8426-1468 to 79",""]]}
+];
+
+var lang="en",haz="all";
+var ticks={},evs=[];
+function ls(get,k,v){try{if(get)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var rawT=ls(true,"rph.ticks");
+try{ticks=rawT?JSON.parse(rawT):{t1:1,f1:1,f2:1,e1:1,d2:1}}catch(e){ticks={}}
+if(false){} /* sample state so the page opens in a working view */
+try{evs=JSON.parse(ls(true,"rph.evs")||"[]")}catch(e){evs=[]}
+var sl=ls(true,"rph.lang"); if(sl==="fil")lang="fil";
+
+var $=function(s){return document.querySelector(s)};
+function t(){return T[lang]}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function toast(m){var x=$("#toast");x.textContent=m;x.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){x.hidden=true},1600)}
+
+function renderStatic(){
+ document.documentElement.lang=lang==="fil"?"fil":"en";
+ document.querySelectorAll("[data-i]").forEach(function(n){var v=t()[n.getAttribute("data-i")];if(typeof v==="string")n.textContent=v});
+ document.querySelectorAll(".langs button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===lang)});
+ $("#q").setAttribute("aria-label",t().searchLabel);
+}
+function renderChips(){
+ var box=$("#hazChips");box.textContent="";
+ ["all"].concat(H).forEach(function(h){
+  var b=el("button","chip",t().haz[h]);b.type="button";b.setAttribute("aria-pressed",h===haz);
+  b.onclick=function(){haz=h;renderChecklist();renderChips()};box.appendChild(b)});
+}
+function visible(){return ITEMS.filter(function(i){return haz==="all"||i[4].indexOf(haz)>-1})}
+function renderChecklist(){
+ var box=$("#lists");box.textContent="";
+ var vis=visible(),order=["toil","food","tools","docs"];
+ order.forEach(function(c){
+  var its=vis.filter(function(i){return i[0]===c});if(!its.length)return;
+  var done=its.filter(function(i){return ticks[i[1]]}).length;
+  var wrap=el("div","cat"),h=el("h4");h.appendChild(el("span","",t().cats[c]));h.appendChild(el("span","",done+"/"+its.length));wrap.appendChild(h);
+  var ul=el("ul","items");
+  its.forEach(function(i){
+   var li=el("li"),lb=el("label","item"),cb=document.createElement("input");cb.type="checkbox";cb.id="c-"+i[1];cb.checked=!!ticks[i[1]];
+   cb.onchange=function(){if(cb.checked)ticks[i[1]]=1;else delete ticks[i[1]];ls(false,"rph.ticks",JSON.stringify(ticks));renderChecklist()};
+   lb.appendChild(cb);lb.appendChild(el("span","",lang==="fil"?i[3]:i[2]));li.appendChild(lb);ul.appendChild(li)});
+  wrap.appendChild(ul);box.appendChild(wrap)});
+ var total=vis.length,n=vis.filter(function(i){return ticks[i[1]]}).length,p=total?Math.round(n/total*100):0;
+ $("#pct").textContent=p+"%";$("#bar").style.width=p+"%";$("#meter").setAttribute("aria-valuenow",p);
+ $("#count").textContent=n+" "+t().of+" "+total+" "+t().itemsReady;
+ var g=$("#gaps");g.textContent="";
+ var box2=el("div","tipbox");
+ var miss=order.map(function(c){var m=vis.filter(function(i){return i[0]===c&&!ticks[i[1]]});return [c,m]}).filter(function(x){return x[1].length});
+ if(!miss.length){box2.textContent=t().gapsNone}
+ else{box2.appendChild(el("strong","",t().gapsTitle));var ul=el("ul");
+  miss.forEach(function(x){ul.appendChild(el("li","",t().cats[x[0]]+": "+x[1].length+" "+t().left))});box2.appendChild(ul)}
+ g.appendChild(box2);
+ var tips=$("#tips");tips.textContent="";
+ (TIPS[lang][haz]||[]).concat(haz==="all"?[]:TIPS[lang].all.slice(0,1)).forEach(function(s){tips.appendChild(el("li","",s))});
+}
+function copy(text){
+ function ok(){toast(t().copied+": "+text)}
+ try{navigator.clipboard.writeText(text).then(ok,function(){fallback()})}catch(e){fallback()}
+ function fallback(){var a=document.createElement("textarea");a.value=text;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}a.remove()}
+}
+function renderHot(){
+ var q=$("#q").value.trim().toLowerCase(),box=$("#agencies");box.textContent="";var any=false;
+ AG.forEach(function(a){
+  var ls_=a.l.filter(function(x){return !q||a.n.toLowerCase().indexOf(q)>-1||x[0].toLowerCase().indexOf(q)>-1||a.r[lang].toLowerCase().indexOf(q)>-1});
+  if(!ls_.length)return;any=true;
+  var s=el("div","agency card");s.appendChild(el("h3","",a.n));s.appendChild(el("p","role",a.r[lang]));
+  ls_.forEach(function(x){
+   var row=el("div","num"),left=el("div"),c=el("code","",x[0]);left.appendChild(c);if(x[1])left.appendChild(el("small","",x[1]));
+   var acts=el("div","acts"),cp=el("button","btn ghost sm",t().copy);cp.type="button";cp.onclick=function(){copy(x[0])};acts.appendChild(cp);
+   if(/^[\d\s-]+$/.test(x[0])){var ca=el("a","btn sm",t().call);ca.href="tel:"+x[0].replace(/\D/g,"");ca.style.textDecoration="none";acts.appendChild(ca)}
+   row.appendChild(left);row.appendChild(acts);s.appendChild(row)});
+  box.appendChild(s)});
+ if(!any)box.appendChild(el("p","hint",t().noMatch));
+}
+function renderEvac(){
+ var box=$("#evList");box.textContent="";
+ function card(e,sample,idx){
+  var c=el("div","ev"),h=el("h4","",e.name);if(sample)h.appendChild(el("span","tag",t().evEmpty));c.appendChild(h);
+  var dl=el("dl");[[t().lblBrgy,e.brgy],[t().lblLand,e.land],[t().lblPerson,e.person],[t().lblPhone,e.phone]].forEach(function(r){if(!r[1])return;dl.appendChild(el("dt","",r[0]));dl.appendChild(el("dd","",r[1]))});
+  c.appendChild(dl);
+  if(!sample){var rm=el("button","btn ghost sm",t().remove);rm.type="button";rm.style.justifySelf="start";rm.style.marginTop="6px";rm.onclick=function(){evs.splice(idx,1);ls(false,"rph.evs",JSON.stringify(evs));renderEvac()};c.appendChild(rm)}
+  return c}
+ if(!evs.length)box.appendChild(card(t().evExample,true));
+ evs.forEach(function(e,i){box.appendChild(card(e,false,i))});
+}
+
+document.querySelectorAll(".langs button").forEach(function(b){b.onclick=function(){lang=b.dataset.lang;ls(false,"rph.lang",lang);renderAll()}});
+document.querySelectorAll("nav.tabs button").forEach(function(b){b.onclick=function(){
+ document.querySelectorAll("nav.tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});
+ ["check","hot","evac"].forEach(function(k){$("#p-"+k).hidden=(k!==b.dataset.tab)})}});
+document.querySelectorAll("[data-copy]").forEach(function(b){b.onclick=function(){copy(b.dataset.copy)}});
+$("#q").oninput=renderHot;
+$("#reset").onclick=function(){ticks={};ls(false,"rph.ticks","{}");renderChecklist()};
+$("#evForm").onsubmit=function(ev){ev.preventDefault();
+ evs.push({name:$("#f-name").value.trim(),brgy:$("#f-brgy").value.trim(),land:$("#f-land").value.trim(),person:$("#f-person").value.trim(),phone:$("#f-phone").value.trim()});
+ ls(false,"rph.evs",JSON.stringify(evs));this.reset();renderEvac()};
+function renderAll(){renderStatic();renderChips();renderChecklist();renderHot();renderEvac()}
+renderAll();
+})();
+</script>
+
+</body>
+</html>
